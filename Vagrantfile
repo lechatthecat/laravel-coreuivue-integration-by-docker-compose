@@ -77,4 +77,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "mv composer.phar /usr/local/bin/composer", privileged: true
   config.vm.provision "shell", inline: "composer update", privileged: false
   config.vm.provision "shell", inline: "npm install && npm run dev", privileged: false
+  config.vm.provision "shell", inline: "rm -rf /var/www/html && ln -fs /vagrant /var/www/html", privileged: true
 end
+
