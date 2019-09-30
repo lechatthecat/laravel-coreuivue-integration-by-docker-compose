@@ -3,7 +3,7 @@ Integration of [laravel](https://github.com/laravel/laravel) and [coreui/vue](ht
 
 # How to use
 ## Vagrant
-You use the vagrantfile to try this project:
+You can use the vagrantfile to try this project:
 ```
 $ git clone https://github.com/lechatthecat/laravel-coreuivue-integration
 $ cd laravel-coreuivue-integration
