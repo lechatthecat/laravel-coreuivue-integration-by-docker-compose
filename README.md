@@ -1,5 +1,5 @@
 # laravel-coreuivue-integration
-Integration of laravel and [coreui/vue](https://github.com/coreui/coreui-vue).
+Integration of [laravel](https://github.com/laravel/laravel) and [coreui/vue](https://github.com/coreui/coreui-vue).
 
 # How to use
 ## Vagrant
