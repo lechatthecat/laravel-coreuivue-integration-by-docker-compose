@@ -88,7 +88,7 @@ Vagrant.configure("2") do |config|
     s.inline += "&& sudo rm /etc/httpd/conf/httpd.conf"
     s.inline += "&& sudo cp -f /vagrant/httpd.conf /etc/httpd/conf/httpd.conf"
     s.inline += "&& sudo chown apache:apache /etc/httpd/conf/httpd.conf"
-    s.inline += "&& sudo systemctl restart httpd && sudo setenforce 0"
+    s.inline += "&& sudo systemctl restart httpd && sudo systemctl enable httpd && sudo setenforce 0"
   end
 end
 
