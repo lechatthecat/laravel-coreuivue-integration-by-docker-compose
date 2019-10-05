@@ -7,10 +7,8 @@ You can use the vagrantfile to try this project:
 ```
 $ git clone https://github.com/lechatthecat/laravel-coreuivue-integration
 $ cd laravel-coreuivue-integration
-$ vagrant up --no-provision
-$ vagrant provision --provision-with fixsync
-$ vagrant reload
-$ vagrant provision --provision-with module,laravel
+$ vagrant up --provision-with fixsync
+$ vagrant reload --provision-with modules,laravel
 ```
 And the app should be working on: http://192.168.33.10
 
