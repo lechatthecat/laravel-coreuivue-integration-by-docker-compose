@@ -7,31 +7,28 @@ You can use the vagrantfile to try this project:
 ```
 $ git clone https://github.com/lechatthecat/laravel-coreuivue-integration
 $ cd laravel-coreuivue-integration
-$ vagrant up --provision
-```
-
-And you must edit the httpd.conf to allow "Require all granted":
-```
-<Directory "/var/www/html" />
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    Require all granted
-</Directory>
-```
-And you must change the documentroot:
-```
-DocumentRoot "/var/www/html/laravel-coreui/public/"
-```
-
-Or simply use the httpd.conf included in this project.  
-(Please make sure your shared folder can be referenced from the guest machine)
-```
-$ cp -f /vagrant/httpd.conf /etc/httpd/conf/httpd.conf
-```
-
-Then 
-```
-$ vagrant ssh
-$ sudo systemctl restart httpd
+$ vagrant up --no-provision
+$ vagrant provision --provision-with fixsync
+$ vagrant reload
+$ vagrant provision --provision-with module,laravel
 ```
 And the app should be working on: http://192.168.33.10
+
+## Docker
+Build the containers:
+```
+$ git clone https://github.com/lechatthecat/laravel-coreuivue-integration
+$ cd laravel-coreuivue-integration
+$ docker-compose up -d -build
+```
+Change some settings and install modules after building:
+```
+$ docker-compose exec laravel ash
+# cd laravel-coreui/src
+# npm install
+# composer install
+# php artisan key:generate
+# chown -R www-data:www-data laravel-coreui
+# chmod 777 storage
+```
+Then the app should be running on: http://localhost:10080

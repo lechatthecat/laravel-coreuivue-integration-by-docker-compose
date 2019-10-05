@@ -64,19 +64,26 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: "sudo yum -y install kernel-devel kernel-headers dkms gcc gcc-c++", privileged: true
-  config.vm.provision "shell", inline: "sudo yum -y update kernel", privileged: true
-  config.vm.provision "shell", inline: "yum install -y httpd && systemctl start httpd.service && systemctl enable httpd.service", privileged: true
-  config.vm.provision "shell", inline: "systemctl restart httpd.service && systemctl enable httpd.service", privileged: true
-  config.vm.provision "shell", inline: "rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm", privileged: true
-  config.vm.provision "shell", inline: "yum install https://centos7.iuscommunity.org/ius-release.rpm", privileged: true
-  config.vm.provision "shell", inline: "yum -y install php72u php72u-mysqlnd php72u-gd php72u-mbstring php72u-opcache php72u-xml php72u-pecl-xdebug php72u-pdo php72u-devel php72u-json", privileged: true
-  config.vm.provision "shell", inline: "systemctl restart httpd", privileged: true
-  config.vm.provision "shell", inline: "setenforce 0 && yum install -y npm", privileged: true
-  config.vm.provision "shell", inline: "cd /vagrant/laravel-coreui && curl -sS https://getcomposer.org/installer | php", privileged: false
-  config.vm.provision "shell", inline: "mv composer.phar /usr/local/bin/composer", privileged: true
-  config.vm.provision "shell", inline: "composer update", privileged: false
-  config.vm.provision "shell", inline: "npm install && npm run dev", privileged: false
-  config.vm.provision "shell", inline: "rm -rf /var/www/html && ln -fs /vagrant /var/www/html", privileged: true
+  config.vm.provision :shell, inline: "setenforce 0", run: 'always', privileged: true
+  config.vm.provision "fixsync", privileged: true, type: "shell" do |s|
+    s.inline = "yum -y install kernel-devel kernel-headers dkms gcc gcc-c++ && yum -y update kernel"
+  end
+  config.vm.provision "modules", privileged: true, type: "shell" do |s|
+    s.inline = "yum install -y httpd && systemctl start httpd.service && systemctl enable httpd.service"
+    s.inline += "&& systemctl restart httpd.service && systemctl enable httpd.service"
+    s.inline += "&& rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
+    s.inline += "&& yum -y install https://centos7.iuscommunity.org/ius-release.rpm"
+    s.inline += "&& yum -y install php72u php72u-mysqlnd php72u-gd php72u-mbstring php72u-opcache php72u-xml php72u-pecl-xdebug php72u-pdo php72u-devel php72u-json"
+    s.inline += "&& systemctl restart httpd"
+    s.inline += "&& yum install -y npm"
+  end
+  config.vm.provision "laravel", privileged: false, type: "shell" do |s|
+    s.inline = "cd /vagrant/laravel-coreui && curl -sS https://getcomposer.org/installer | php"
+    s.inline += "&& mv composer.phar /usr/local/bin/composer"
+    s.inline += "&& composer install"
+    s.inline += "&& npm install && npm run dev"
+    s.inline += "&& cp -f /vagrant/httpd.conf /etc/httpd/conf/httpd.conf"
+    s.inline += "&& systemctl restart httpd"
+  end
 end
 
