@@ -523,29 +523,35 @@ export default {
           activity: 'Last week'
         }
       ],
-      tableFields: {
-        avatar: {
+      tableFields: [
+        {
+          key: 'avatar',
           label: '<i class="icon-people"></i>',
           class: 'text-center'
         },
-        user: {
+        {
+          key: 'user',
           label: 'User'
         },
-        country: {
+        {
+          key: 'country',
           label: 'Country',
           class: 'text-center'
         },
-        usage: {
+        {
+          key: 'usage',
           label: 'Usage'
         },
-        payment: {
+        {
+          key: 'payment',
           label: 'Payment method',
           class: 'text-center'
         },
-        activity: {
+        {
+          key: 'activity',
           label: 'Activity'
         }
-      }
+      ]
     }
   },
   methods: {
