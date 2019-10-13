@@ -6,6 +6,9 @@ mix.webpackConfig({
         alias: {
             '@': path.resolve(__dirname, 'resources')
         }
+    },
+    output: {
+        chunkFilename: '[id].chunk.[chunkhash].js',
     }
 });
 

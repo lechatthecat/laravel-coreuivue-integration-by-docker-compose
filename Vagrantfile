@@ -33,8 +33,8 @@ Vagrant.configure("2") do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   config.vm.network "private_network", ip: "192.168.33.10"
-  #config.vm.synced_folder "./", "/vagrant", type: "virtualbox", mount_options: ['dmode=777', 'fmode=777']
-  config.vm.synced_folder "./", "/vagrant", type: "virtualbox", owner: 'vagrant', group: 'apache', mount_options: ['dmode=777', 'fmode=777']
+  config.vm.synced_folder "./", "/vagrant", type: "virtualbox", mount_options: ['dmode=777', 'fmode=777']
+  #config.vm.synced_folder "./", "/vagrant", type: "virtualbox", owner: 'vagrant', group: 'apache', mount_options: ['dmode=777', 'fmode=777']
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -75,12 +75,13 @@ Vagrant.configure("2") do |config|
     s.inline += "&& yum -y install https://centos7.iuscommunity.org/ius-release.rpm"
     s.inline += "&& yum -y install php72u php72u-mysqlnd php72u-gd php72u-mbstring php72u-opcache php72u-xml php72u-pecl-xdebug php72u-pdo php72u-devel php72u-json"
     s.inline += "&& systemctl restart httpd"
-    s.inline += "&& yum install -y npm"
     s.inline += "&& rm -rf /var/www/html && ln -fs /vagrant /var/www/html"
     s.inline += "&& systemctl restart httpd.service"
   end
   config.vm.provision "laravel", privileged: false, type: "shell" do |s|
-    s.inline = "curl -sS https://getcomposer.org/installer | php -- --quiet"
+    s.inline = "curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -"
+    s.inline += "&& sudo yum update && sudo yum install -y nodejs"
+    s.inline += "&& curl -sS https://getcomposer.org/installer | php -- --quiet"
     s.inline += "&& sudo mv composer.phar /usr/bin/composer"
     s.inline += "&& cd /vagrant/laravel-coreui/src"
     s.inline += "&& composer install -q"
