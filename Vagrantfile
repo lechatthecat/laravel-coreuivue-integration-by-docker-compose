@@ -80,7 +80,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.provision "laravel", privileged: false, type: "shell" do |s|
     s.inline = "curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -"
-    s.inline += "&& sudo yum update && sudo yum install -y nodejs"
+    s.inline += "&& sudo yum -y update && sudo yum install -y nodejs"
     s.inline += "&& curl -sS https://getcomposer.org/installer | php -- --quiet"
     s.inline += "&& sudo mv composer.phar /usr/bin/composer"
     s.inline += "&& cd /vagrant/laravel-coreui/src"
