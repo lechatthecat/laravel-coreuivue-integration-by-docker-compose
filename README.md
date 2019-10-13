@@ -18,16 +18,17 @@ Build the containers:
 ```
 $ git clone https://github.com/lechatthecat/laravel-coreuivue-integration
 $ cd laravel-coreuivue-integration
-$ docker-compose up -d -build
+$ docker-compose up -d --build
 ```
 Change some settings and install modules after building:
 ```
 $ docker-compose exec laravel ash
-# cd laravel-coreui/src
+# cd src
 # npm install
 # composer install
 # php artisan key:generate
-# chown -R www-data:www-data laravel-coreui
+# chown -R www-data:www-data ../../laravel-coreui/src
 # chmod 777 storage
+# npm run dev
 ```
 Then the app should be running on: http://localhost:10080
