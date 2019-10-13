@@ -410,37 +410,52 @@
           </b-row>
           <br/>
           <b-table class="mb-0 table-outline" responsive="sm" hover :items="tableItems" :fields="tableFields" head-variant="light">
-            <div slot="avatar" class="avatar" slot-scope="item">
-              <img :src="item.value.url" class="img-avatar" alt="">
-              <span class="avatar-status" v-bind:class="{ 'bg-success': item.value.status == 'success',  'bg-warning': item.value.status == 'warning', 'bg-danger': item.value.status == 'danger', 'bg-secondary': item.value.status == '' }"></span>
-            </div>
-            <div slot="user" slot-scope="item">
-              <div>{{item.value.name}}</div>
-              <div class="small text-muted">
-                <span>
-                  <template v-if="item.value.new">New</template>
-                  <template v-else>Recurring</template>
-                </span> | Registered: {{item.value.registered}}
+            <template v-slot:head(avatar)="item">
+              <span v-html="item.label"></span>
+            </template>
+            <template v-slot:cell(avatar)="item">
+              <div class="avatar">
+                <img :src="item.value.url" class="img-avatar" alt="">
+                <span class="avatar-status" v-bind:class="{ 'bg-success': item.value.status == 'success',  'bg-warning': item.value.status == 'warning', 'bg-danger': item.value.status == 'danger', 'bg-secondary': item.value.status == '' }"></span>
               </div>
-            </div>
-            <i slot="country" class="h4 mb-0" :class="flag(item.value.flag)" slot-scope="item" :title="item.value.flag" :id="item.value.flag"></i>
+            </template>
+            <template v-slot:cell(user)="item">
+              <div>
+                <div>{{item.value.name}}</div>
+                <div class="small text-muted">
+                  <span>
+                    <template v-if="item.value.new">New</template>
+                    <template v-else>Recurring</template>
+                  </span> | Registered: {{item.value.registered}}
+                </div>
+              </div>
+            </template>
+            <template v-slot:cell(country)="item">
+              <i class="h4 mb-0" :class="flag(item.value.flag)" :title="item.value.flag" :id="item.value.flag"></i>
+            </template>
             <i class="flag-icon flag-icon-pw h1" title="pw" id="pw"></i>
-            <div slot="usage" slot-scope="item">
-              <div class="clearfix">
-                <div class="float-left">
-                  <strong>{{item.value.value}}%</strong>
+            <template v-slot:cell(usage)="item">
+              <div>
+                <div class="clearfix">
+                  <div class="float-left">
+                    <strong>{{item.value.value}}%</strong>
+                  </div>
+                  <div class="float-right">
+                    <small class="text-muted">{{item.value.period}}</small>
+                  </div>
                 </div>
-                <div class="float-right">
-                  <small class="text-muted">{{item.value.period}}</small>
-                </div>
+                <b-progress height={} class="progress-xs" v-model="item.value.value" :variant="variant(item.value.value)"></b-progress>
               </div>
-              <b-progress height={} class="progress-xs" v-model="item.value.value" :variant="variant(item.value.value)"></b-progress>
-            </div>
-            <i slot="payment" slot-scope="item" :class="item.value.icon" style="font-size:24px"></i>
-            <div slot="activity" slot-scope="item">
-              <div class="small text-muted">Last login</div>
-              <strong>{{item.value}}</strong>
-            </div>
+            </template>
+            <template v-slot:cell(payment)="item">
+              <i :class="item.value.icon" style="font-size:24px"></i>
+            </template>
+            <template v-slot:cell(activity)="item">
+              <div>
+                <div class="small text-muted">Last login</div>
+                <strong>{{item.value}}</strong>
+              </div>
+            </template>
           </b-table>
         </b-card>
       </b-col>
