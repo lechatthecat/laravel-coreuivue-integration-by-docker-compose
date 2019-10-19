@@ -14,4 +14,6 @@ RUN set -eux && \
   apk del .build-php-dependencies && \
   docker-php-ext-install pdo_mysql && \
   curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
-  apk add --update-cache nodejs nodejs-npm 
+  apk add --update-cache --no-cache nodejs=10.16.3-r0 nodejs-npm=10.16.3-r0
+
+#CMD /bin/ash /docker.sh
