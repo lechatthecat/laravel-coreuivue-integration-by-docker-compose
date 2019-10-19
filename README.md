@@ -21,7 +21,7 @@ $ cd laravel-coreuivue-integration
 $ docker-compose up -d --build
 ```
 
-You can get inside after building:
+Get inside after building:
 ```
 $ docker-compose exec laravel ash
 # ash /docker.sh
