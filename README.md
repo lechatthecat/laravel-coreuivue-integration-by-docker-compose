@@ -27,10 +27,10 @@ $ docker-compose exec laravel ash
 $ ash /docker.sh
 ```
 
-Then wait until the build is finished. Logs are:
+Then wait until the build is finished.
+Then the app should be running on: http://localhost:10080
+
+Logs are:
 ```
 $ docker logs --tail 50 --follow --timestamps laravel
 ```
-
-Then the app should be running on: http://localhost:10080
-
