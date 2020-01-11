@@ -21,14 +21,10 @@ $ cd laravel-coreuivue-integration
 $ docker-compose up -d --build
 ```
 
-Then get inside after building and run the following:
-```
-$ docker-compose exec laravel ash
-# ash /docker.sh
-```
-Then the app should be running on: http://localhost:10080
-
-Logs are:
+Then wait until the build is finished. Logs are:
 ```
 $ docker logs --tail 50 --follow --timestamps 
 ```
+
+Then the app should be running on: http://localhost:10080
+
