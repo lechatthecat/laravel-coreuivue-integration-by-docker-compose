@@ -1,5 +1,5 @@
 # laravel-coreuivue-integration
-Integration of [laravel](https://github.com/laravel/laravel) and [coreui/vue](https://github.com/coreui/coreui-vue) as **SPA** in docker.
+Integration of [laravel](https://github.com/laravel/laravel) and [coreui/vue](https://github.com/coreui/coreui-vue) as **SPA** in **docker containers**.
 
 # How to use
 ## Vagrant
