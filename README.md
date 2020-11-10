@@ -11,7 +11,6 @@ $ vagrant up --provision-with fixsync
 $ vagrant reload --provision-with modules,laravel
 ```
 And the app should be working on: http://192.168.33.10  
-(To install npm packages, always use --save option. like `$ npm install vue --save` )
 
 ## Docker
 Build the containers:
