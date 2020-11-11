@@ -1,4 +1,10 @@
-version: "3"
+version: "3.5"
+
+x-services-volume:
+  &laravel-volume
+  type: bind
+  source: ./laravel-coreui
+  target: /laravel-coreui
 
 services:
   laravel:
@@ -12,7 +18,7 @@ services:
         - TZ=${TZ}
     # bind mount
     volumes:
-      - ./laravel-coreui:/laravel-coreui
+      - <<: *laravel-volume
       - ./docker/laravel/laravel_build.sh:/laravel-coreui/laravel_build.sh
       - ./logs:/var/log/php
       - ./docker/laravel/php.ini:/usr/local/etc/php/php.ini
@@ -20,9 +26,9 @@ services:
     environment:
       - DB_CONNECTION=mysql
       - DB_HOST=db
-      - DB_DATABASE=root  #${DB_NAME}
-      - DB_USERNAME=root  #${DB_USER}
-      - DB_PASSWORD=root  #${DB_PASSWORD}
+      - DB_DATABASE=${DB_NAME}
+      - DB_USERNAME=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
       - TZ=${TZ}
     networks:
       - app_net
@@ -35,6 +41,7 @@ services:
     ports:
       - 10080:80
     volumes:
+      - *laravel-volume
       - ./logs:/var/log/nginx
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:z
     environment:
@@ -59,9 +66,24 @@ services:
       - TZ=${TZ}
     networks:
       - app_net
+  # redis 5.0.5 
+  redis:
+    container_name: myredis
+    image: redis:5.0.5-alpine
+    # bind mount
+    volumes:
+      - redis-store:/data
+      - ./logs:/var/log/redis.log:z
+      - ./docker/redis/my.conf:/etc/redis/my.conf:z
+    ports:
+      - 16379:6379
+    command: redis-server /etc/redis/my.conf
+    networks:
+      - app_net
 networks:
     # Containers in same network can access each other by using its container name as host name
     app_net:
         driver: "bridge"
 volumes:
   db-store:
+  redis-store:
