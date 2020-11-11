@@ -73,7 +73,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "modules", privileged: true, type: "shell" do |s|
     s.inline = "rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
     s.inline += "&& yum -y install https://centos7.iuscommunity.org/ius-release.rpm"
-    s.inline += "&& yum -y install php72u php72u-mysqlnd php72u-gd php72u-mbstring php72u-opcache php72u-xml php72u-pecl-xdebug php72u-pdo php72u-devel php72u-json"
+    s.inline += "&& yum -y install php74u php74u-mysqlnd php74u-gd php74u-mbstring php74u-opcache php74u-xml php74u-pecl-xdebug php74u-pdo php74u-devel php74u-json"
     s.inline += "&& systemctl restart httpd"
     s.inline += "&& rm -rf /var/www/html && ln -fs /vagrant /var/www/html"
     s.inline += "&& systemctl restart httpd.service"
