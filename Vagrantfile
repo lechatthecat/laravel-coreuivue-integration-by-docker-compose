@@ -84,6 +84,8 @@ Vagrant.configure("2") do |config|
     s.inline += "&& curl -sS https://getcomposer.org/installer | php -- --quiet"
     s.inline += "&& sudo mv composer.phar /usr/bin/composer"
     s.inline += "&& cd /vagrant/laravel-coreui/src"
+    s.inline += "&& composer update"
+    s.inline += "&& composer self-update"
     s.inline += "&& composer install -q"
     s.inline += "&& npm install && npm run dev"
     s.inline += "&& sudo rm /etc/httpd/conf/httpd.conf"
