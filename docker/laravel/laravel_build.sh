@@ -6,4 +6,5 @@ chown -R www-data:www-data ../../laravel-coreui/src
 chmod 777 storage
 npm install
 npm run dev 
-#tail -f /dev/null
+composer update
+composer self-update
