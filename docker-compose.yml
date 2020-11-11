@@ -11,6 +11,7 @@ services:
     container_name: laravel
     depends_on:
       - mydb
+      - myredis
     build:
       context: .
       dockerfile: docker/laravel/Dockerfile
@@ -67,7 +68,7 @@ services:
     networks:
       - app_net
   # redis 5.0.5 
-  redis:
+  myredis:
     container_name: myredis
     image: redis:5.0.5-alpine
     # bind mount
