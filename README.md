@@ -23,7 +23,7 @@ $ docker-compose up -d --build
 Enter the container and run the script:
 ```
 $ docker-compose exec laravel ash
-$ ash /docker.sh
+$ ash /laravel_build.sh
 ```
 
 Then wait until the build is finished.
