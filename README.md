@@ -2,16 +2,6 @@
 Integration of [laravel](https://github.com/laravel/laravel) and [coreui/vue](https://github.com/coreui/coreui-vue) as **SPA** in **docker containers**.
 
 # How to use
-## Vagrant
-You can use the vagrantfile to try this project:
-```
-$ git clone https://github.com/lechatthecat/laravel-coreuivue-integration
-$ cd laravel-coreuivue-integration
-$ vagrant up --provision-with fixsync
-$ vagrant reload --provision-with modules,laravel
-```
-And the app should be working on: http://192.168.33.10  
-
 ## Docker
 Build the containers:
 ```
@@ -33,3 +23,13 @@ Logs are:
 ```
 $ docker logs --tail 50 --follow --timestamps laravel
 ```
+
+## Vagrant
+You can use the vagrantfile to try this project:
+```
+$ git clone https://github.com/lechatthecat/laravel-coreuivue-integration
+$ cd laravel-coreuivue-integration
+$ vagrant up --provision-with fixsync
+$ vagrant reload --provision-with modules,laravel
+```
+And the app should be working on: http://192.168.33.10  
