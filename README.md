@@ -5,7 +5,7 @@ Integration of [laravel](https://github.com/laravel/laravel) and [coreui/vue](ht
 ## Docker
 Build the containers:
 ```
-$ git clone https://github.com/lechatthecat/laravel-coreuivue-integration
+$ git clone https://github.com/lechatthecat/laravel-coreuivue-integration-by-docker-compose
 $ cd laravel-coreuivue-integration
 $ docker-compose up -d --build
 ```
